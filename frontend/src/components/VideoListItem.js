@@ -8,14 +8,14 @@ export default function VideoListItem({item}) {
         <View style={styles.container}>
                 <WebView
             style={styles.webview}
-            source={{ uri: item.url }}
+            source={{ uri: item.videoUrl }}
             mediaPlaybackRequiresUserAction={true}
             
             />
             <Text style={styles.title}>Title</Text>
             <View style={styles.textContainer}>
-                <Text style={styles.text}>{item.username}</Text>
-                <Text style={styles.text}>{item.likes} Likes</Text>
+                <Text style={styles.text}>{item.user.username}</Text>
+                <Text style={styles.text}>{item.likes.length} Likes</Text>
             </View>
         </View>
     );
