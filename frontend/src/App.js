@@ -1,13 +1,14 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import TabNavigator from './components/Navigation/TabNavigator';
+import { AuthProvider} from './context/AuthContext';
+import MainNavigator from './components/Navigation/MainNavigator';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <TabNavigator/>
-    </NavigationContainer> 
+    <AuthProvider>
+        <NavigationContainer>
+        <MainNavigator/>
+      </NavigationContainer> 
+    </AuthProvider>
   );
 }
 
