@@ -1,51 +1,57 @@
 package com.videomedia.videoappbackend.pojo;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
+
+
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-@Entity
-@Table(name = "videoapp_video")
+//@Table(name = "videos")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(collection = "videos")
 public class Video {
 
+    //@Id
+    //@Column(name = "id")
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
+    /* 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JdbcTypeCode(SqlTypes.JSON)
-    private User user;
+    */
+    private String userId;
 
-    @Column(name = "video_url", nullable = false)
+    @NotBlank(message = "url cannot be blank")
+    @NonNull
+    //@Column(name = "video_url", nullable = false)
     private String videoUrl;
 
-    @Column(name = "upload_date", nullable = false)
-    private LocalDate uploadDate;
+    //@Column(name = "upload_date", nullable = false) 
+    private LocalDateTime uploadDate = LocalDateTime.now();
 
-    @Column(name = "title", nullable = false)
+    @NotBlank(message = "url cannot be blank")
+    @NonNull
+    //@Column(name = "title", nullable = false)
+    
     private String title;
 
-    @Column(name = "likes")
-    @JdbcTypeCode(SqlTypes.JSON)
-    private Set<User> likes;
+    //@Column(name = "likes")
+    //@JdbcTypeCode(SqlTypes.JSON)
+   
+    private Set<String> likes = new HashSet<>();
 
     
 }

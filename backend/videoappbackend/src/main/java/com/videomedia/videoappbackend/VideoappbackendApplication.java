@@ -1,26 +1,23 @@
 package com.videomedia.videoappbackend;
 
-import java.time.LocalDate;
-import java.util.HashSet;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.videomedia.videoappbackend.pojo.User;
-import com.videomedia.videoappbackend.pojo.Video;
-import com.videomedia.videoappbackend.repository.VideoAppUserRepository;
-import com.videomedia.videoappbackend.repository.VideoAppVideoRepository;
+import com.videomedia.videoappbackend.repository.UserRepository;
+import com.videomedia.videoappbackend.repository.VideoRepository;
 
 @SpringBootApplication
 public class VideoappbackendApplication implements CommandLineRunner {
 
 	@Autowired
-	VideoAppVideoRepository videoAppVideoRepository;
+	VideoRepository videoAppVideoRepository;
 
 	@Autowired
-	VideoAppUserRepository videoAppUserRepository;
+	UserRepository videoAppUserRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(VideoappbackendApplication.class, args);
@@ -29,16 +26,19 @@ public class VideoappbackendApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		User[] users = new User[]{
-			new User(6L, "lola", "111", "Lola", "Lopez", null, null),
-			new User(7L, "lola2", "111", "Lola2", "Lopez", null, null),
-			new User(5L, "lola3", "111", "Lola3", "Lopez", null, null),
-			new User(4L, "lola4", "111", "Lola4", "Lopez", null, null),
-			new User(3L, "lola5", "111", "Lola5", "Lopez", null, null),
-			new User(2L, "lola6", "111", "Lola6", "Lopez", null, null)
-		};
 
-		Video[] videos = new Video[]{
+		/* 
+		 User[] users = new User[]{
+			new User(6L, "lola", "111", "Lola", "Lopez", null, null),
+			new User(7L, "lola2", "222", "Lola2", "Lopez", null, null),
+			new User(5L, "lola3", "333", "Lola3", "Lopez", null, null),
+			new User(4L, "lola4", "444", "Lola4", "Lopez", null, null),
+			new User(3L, "lola5", "555", "Lola5", "Lopez", null, null),
+			new User(2L, "lola7", "777", "Lola7", "Lopez", null, null)
+		};
+		*/
+		/* 
+		 Video[] videos = new Video[]{
 			new Video(1L, users[0], "https://www.youtube.com/embed/nIekqreVbWY?si=gE29zFdtHxRCxDiz",LocalDate.parse("2020-12-13"),"Title1", new HashSet<>()),
             new Video(2L,users[1], "https://www.youtube.com/embed/qJAaQu-DMJ0?si=LlhwMOt23gYckI8e",LocalDate.parse("2020-12-13"), "Title2", new HashSet<>()),
             new Video(3L, users[2], "https://www.youtube.com/embed/GZHVHK1OxC0?si=rcz1z2DXTc-O_ifx",LocalDate.parse("2020-12-13"), "Title3", new HashSet<>()),
@@ -46,7 +46,8 @@ public class VideoappbackendApplication implements CommandLineRunner {
             new Video(5L, users[4], "https://www.youtube.com/embed/pKv5MAm2Wuw?si=nO0z0bLkTejCdz_U",LocalDate.parse("2020-12-13"), "Title4", new HashSet<>()),
             new Video(6L, users[5], "https://www.youtube.com/embed/zVN3XJ-jse8?si=w11oy1OhoRj7NtEp",LocalDate.parse("2020-12-13"), "Title5", new HashSet<>()),
 		};
-
+		*/
+		/*
 		for (int i = 0; i < users.length; i++) {
 			videoAppUserRepository.save(users[i]);
 		}
@@ -54,7 +55,14 @@ public class VideoappbackendApplication implements CommandLineRunner {
 		for (int i = 0; i < videos.length; i++) {
 			videoAppVideoRepository.save(videos[i]);
 		}
+		*/
 		
 	}
+
+    @Bean
+    BCryptPasswordEncoder bCryptPasswordEncoder(){
+		return new BCryptPasswordEncoder();
+	}
+
 
 }
