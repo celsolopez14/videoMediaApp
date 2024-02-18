@@ -1,47 +1,47 @@
 package com.videomedia.videoappbackend.pojo;
 
 
+import java.util.HashSet;
 import java.util.Set;
 
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-@Entity
-@Table(name = "videoapp_user")
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(collection = "users")
 public class User {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(name = "user_name")
+    @NotBlank(message = "username cannot be blank")
+    @NonNull
+    @Indexed(unique = true)
     private String username;
 
-    @Column(name = "password")
+    @NotBlank(message = "password cannot be blank")
+    @NonNull
     private String password;
 
-    @Column(name = "first_name")
+    @NotBlank(message = "first name cannot be blank")
+    @NonNull
     private String firstName;
 
-    @Column(name = "last_name")
+    @NotBlank(message = "last name cannot be blank")
+    @NonNull
     private String lastName;
 
+    /*
     @Column(name = "followers")
     @JdbcTypeCode(SqlTypes.JSON)
     @ManyToMany
@@ -50,11 +50,15 @@ public class User {
     joinColumns = @JoinColumn(name = "follower_id"),
     inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<User> followers;
-
+     */
+    @Field("followers")
+    private Set<String> followers = new HashSet<>();
+    /* 
     @Column(name = "following")
     @JdbcTypeCode(SqlTypes.JSON)
     @ManyToMany(mappedBy = "followers")
-    private Set<User> following;
+    */
+    @Field("following")
+    private Set<String> following = new HashSet<>();
     
 }
