@@ -8,14 +8,16 @@ export default function VideoListItem({item}) {
         <View style={styles.container}>
                 <WebView
             style={styles.webview}
-            source={{ uri: item.videoUrl }}
+            source={{ uri: item.video.videoUrl }}
             mediaPlaybackRequiresUserAction={true}
+            scrollEnabled={false}
             
             />
-            <Text style={styles.title}>Title</Text>
+            <Text style={styles.title}>{item.video.title}</Text>
             <View style={styles.textContainer}>
-                <Text style={styles.text}>{item.user.username}</Text>
-                <Text style={styles.text}>{item.likes.length} Likes</Text>
+                <Text style={styles.text}>{item.userDTO.firstName}</Text>
+                <Text style={styles.text}>*</Text>
+                <Text style={styles.text}>{item.video.likes.length} Likes</Text>
             </View>
         </View>
     );
@@ -25,26 +27,26 @@ export default function VideoListItem({item}) {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'black',
-      padding:1,
-      
+      borderBottomColor:'whitesmoke',
+      borderWidth:1,
     },
     webview: {
-        height: 200, 
+        height: 300, 
       },
       textContainer:{
         
         flexDirection:'row',
       },
       title:{
-        fontSize:25,
-        padding:10,
-        color:'whitesmoke',
+        fontSize:20,
+        fontWeight:'bold',
+        marginLeft:10,
+        color:'black',
       },
       text:{
         fontSize:15,
-        padding:10,
-        color:'whitesmoke',
+        marginLeft:10,
+        color:'black',
         paddingBottom:5,
       },
   });

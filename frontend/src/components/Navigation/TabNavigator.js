@@ -13,8 +13,8 @@ export default function TabNavigator() {
   return (
     <Tab.Navigator initialRouteName='Home'
     screenOptions={{
-        tabBarStyle: {backgroundColor:'black', borderTopWidth:0},
-        headerStyle: {backgroundColor:'black'},
+        tabBarStyle: {backgroundColor:'white', borderTopWidth:0},
+        headerStyle: {backgroundColor:'white'},
         headerShadowVisible:false,
         headerTitle: () => <Logo/>
     }}
